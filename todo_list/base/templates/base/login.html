@@ -1,0 +1,24 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="box">
+    <div class="heading-box">
+        <h1 style="color: white;">Login</h1>
+    </div>
+    
+    <div class="content">
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" value="Login" class="button">
+        </form>
+        <p>Dont have an account? <a href="{% url 'register' %}" class="links">Register here</a></p>
+
+    </div>
+    
+</div>
+
+{% endblock content %}

@@ -1,0 +1,55 @@
+{% extends 'base/main.html' %}
+{% load static %}
+
+
+{% block content %}
+    
+<div class="box">
+
+    <div class="heading-box">
+
+        {% if request.user.is_authenticated %}
+        <h2 style="color: white;">Hello {{request.user}}</h2>
+        <a href="{% url 'logout' %}" class="links">Logout</a>
+        
+        {% else %}
+        <a href="{% url 'login' %}" class="links">Login</a>    
+        {% endif %}
+        
+        
+        
+    </div>
+    <div class="content">
+        <div class="taskAdd">
+
+            <h2>Task List</h2>
+            <a href="{% url 'task-create' %}" style="margin-left: auto;" class="links">Add Task</a>
+            
+        </div>
+        
+            
+            {% for task in tasks %}
+
+            
+            {% if task.complete %}
+                <div class="taskHeading">
+                <a href="{% url 'task-update' task.id %}"> <s>{{task.title}}</s> </a>
+                <a href="{% url 'task-delete' task.id %}" style="margin-left: auto; color: red; " class="links">Delete</a>
+                </div>
+            {% else %}
+                <div class="taskHeading">
+                    <a href="{% url 'task-update' task.id %}">{{task.title}}</a>
+                    <a href="{% url 'task-delete' task.id %}" style="margin-left: auto; color: red; " class="links">Delete</a>
+                </div>
+            {% endif %}
+                
+            
+            {% empty %}
+            <h3>No items in List</h3>
+            {% endfor %}
+            
+        </table>
+    </div>    
+</div>
+    
+{% endblock content %}
